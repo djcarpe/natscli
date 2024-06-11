@@ -198,8 +198,8 @@ func (c *benchCmd) bench(_ *fisk.ParseContext) error {
 		log.Fatal("You must have at least one publisher or at least one subscriber... try adding --pub 1 and/or --sub 1 to the arguments")
 	}
 
-	if opts.Config == nil {
-		log.Fatalf("Unknown context %q", opts.CfgCtx)
+	if opts().Config == nil {
+		log.Fatalf("Unknown context %q", opts().CfgCtx)
 	}
 
 	if (c.request || c.reply) && c.js {
@@ -375,10 +375,10 @@ func (c *benchCmd) bench(_ *fisk.ParseContext) error {
 		var js2 jetstream.JetStream
 
 		switch {
-		case opts.JsDomain != "":
-			js2, err = jetstream.NewWithDomain(nc, opts.JsDomain)
-		case opts.JsApiPrefix != "":
-			js2, err = jetstream.NewWithAPIPrefix(nc, opts.JsApiPrefix)
+		case opts().JsDomain != "":
+			js2, err = jetstream.NewWithDomain(nc, opts().JsDomain)
+		case opts().JsApiPrefix != "":
+			js2, err = jetstream.NewWithAPIPrefix(nc, opts().JsApiPrefix)
 		default:
 			js2, err = jetstream.New(nc)
 		}
@@ -780,10 +780,10 @@ func kvPutter(c benchCmd, nc *nats.Conn, progress *uiprogress.Bar, msg []byte, n
 	var js2 jetstream.JetStream
 
 	switch {
-	case opts.JsDomain != "":
-		js2, err = jetstream.NewWithDomain(nc, opts.JsDomain)
-	case opts.JsApiPrefix != "":
-		js2, err = jetstream.NewWithAPIPrefix(nc, opts.JsApiPrefix)
+	case opts().JsDomain != "":
+		js2, err = jetstream.NewWithDomain(nc, opts().JsDomain)
+	case opts().JsApiPrefix != "":
+		js2, err = jetstream.NewWithAPIPrefix(nc, opts().JsApiPrefix)
 	default:
 		js2, err = jetstream.New(nc)
 	}
@@ -995,10 +995,10 @@ func (c *benchCmd) runSubscriber(bm *bench.Benchmark, nc *nats.Conn, startwg *sy
 			var js2 jetstream.JetStream
 
 			switch {
-			case opts.JsDomain != "":
-				js2, err = jetstream.NewWithDomain(nc, opts.JsDomain)
-			case opts.JsApiPrefix != "":
-				js2, err = jetstream.NewWithAPIPrefix(nc, opts.JsApiPrefix)
+			case opts().JsDomain != "":
+				js2, err = jetstream.NewWithDomain(nc, opts().JsDomain)
+			case opts().JsApiPrefix != "":
+				js2, err = jetstream.NewWithAPIPrefix(nc, opts().JsApiPrefix)
 			default:
 				js2, err = jetstream.New(nc)
 			}
@@ -1105,10 +1105,10 @@ func (c *benchCmd) runSubscriber(bm *bench.Benchmark, nc *nats.Conn, startwg *sy
 			var js2 jetstream.JetStream
 
 			switch {
-			case opts.JsDomain != "":
-				js2, err = jetstream.NewWithDomain(nc, opts.JsDomain)
-			case opts.JsApiPrefix != "":
-				js2, err = jetstream.NewWithAPIPrefix(nc, opts.JsApiPrefix)
+			case opts().JsDomain != "":
+				js2, err = jetstream.NewWithDomain(nc, opts().JsDomain)
+			case opts().JsApiPrefix != "":
+				js2, err = jetstream.NewWithAPIPrefix(nc, opts().JsApiPrefix)
 			default:
 				js2, err = jetstream.New(nc)
 			}
